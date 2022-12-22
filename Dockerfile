@@ -6,7 +6,7 @@ ENV RAILS_ENV production
 COPY . /opt/app-root/src/
 ENV GEM_HOME ~/.gem
 RUN bundle install
-RUN ./run.sh
+RUN bash run.sh
 
 USER root
 RUN chmod og+rw /opt/app-root/src/
