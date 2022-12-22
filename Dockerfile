@@ -3,6 +3,8 @@ USER default
 EXPOSE 8080
 ENV RACK_ENV production
 ENV RAILS_ENV production
+RUN mkdir /opt/app-root/src/
+WORKDIR /opt/app-root/src/
 COPY . /opt/app-root/src/
 ENV GEM_HOME ~/.gem
 RUN bundle install
