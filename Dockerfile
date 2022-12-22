@@ -3,12 +3,9 @@ USER default
 EXPOSE 8080
 ENV RACK_ENV production
 ENV RAILS_ENV production
-USER root
-RUN mkdir /chanu
-USER default
+COPY . /opt/apt-root-/src/
 ENV GEM_HOME ~/.gem
 RUN bundle install
-COPY . /chanu
 CMD ["./run.sh"]
 
 USER root
