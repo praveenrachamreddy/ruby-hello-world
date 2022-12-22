@@ -3,9 +3,9 @@ USER default
 EXPOSE 8080
 ENV RACK_ENV production
 ENV RAILS_ENV production
-RUN mkdir /opt/app-root/src/
-WORKDIR /opt/app-root/src/
-COPY . /opt/app-root/src/
+RUN mkdir /chanu/chanu/src/
+WORKDIR /chanu/chanu/src/
+COPY . /chanu/chanu/src/
 ENV GEM_HOME ~/.gem
 RUN bundle install
 CMD ["./run.sh"]
