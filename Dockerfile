@@ -10,5 +10,5 @@ RUN bundle install
 CMD ["./run.sh"]
 
 USER root
-RUN chmod og+rw /opt/app-root/src/db
+RUN chmod og+rw /opt/app-root/src/
 USER default
