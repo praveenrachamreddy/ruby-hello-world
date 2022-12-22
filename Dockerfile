@@ -3,11 +3,11 @@ USER default
 EXPOSE 8080
 ENV RACK_ENV production
 ENV RAILS_ENV production
-WORKDIR /opt/app-root/src/
 COPY . /opt/app-root/src/
 ENV GEM_HOME ~/.gem
 RUN bundle install
-CMD ["./run.sh"]
+RUN cd/opt/app-root/src
+RUN ./run.sh
 
 USER root
 RUN chmod og+rw /opt/app-root/src/
