@@ -6,9 +6,9 @@ ENV RAILS_ENV production
 USER root
 RUN mkdir /chanu
 USER default
-COPY . /chanu
 ENV GEM_HOME ~/.gem
 RUN bundle install
+COPY . /chanu
 CMD ["./run.sh"]
 
 USER root
