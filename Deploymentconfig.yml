@@ -1,0 +1,88 @@
+apiVersion: apps.openshift.io/v1
+kind: DeploymentConfig
+metadata:
+  name: app1
+  namespace: custom
+spec:
+  triggers:
+    - type: ImageChange
+      imageChangeParams:
+        automatic: true
+        containerNames:
+          - app1
+        from:
+          kind: ImageStreamTag
+          namespace: custom
+          name: 'app1:latest'
+        lastTriggeredImage: >-
+          image-registry.openshift-image-registry.svc:5000/custom/app1@sha256:dbc99232c73667f72c3efcc9c120d414f63aa3be6cb52506ad2b2cb4deb6c059
+    - type: ConfigChange
+  selector:
+    app: app1
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: app1
+    spec:
+      containers:
+        - name: app1
+          image: >-
+            image-registry.openshift-image-registry.svc:5000/custom/app1
+          ports:
+          - containerPort: 8080
+          livenessProbe:
+            exec:
+              command: 
+                - /bin/sh
+                - -c 
+                - nc -z localhost 8080
+            initialDelaySeconds: 60
+            periodSeconds: 10
+      #     readinessProbe:
+      #       httpGet:
+      #         path: / #we need to give health check path
+      #         port: 80
+      #       initialDelaySeconds: 60
+      #       periodSeconds: 10  
+          resources:
+            requests:
+              memory: "200Mi"
+              cpu: "250m"
+            limits:
+              memory: "328Mi"
+              cpu: "500m"
+      #     volumeMounts:
+      #     - mountPath: /app # we need to give working directory
+      #       name: app1
+      # volumes:
+      # - name: app1 
+      #   persistentVolumeClaim:
+      #     claimName: app1                  
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: app1
+  namespace: custom
+spec:
+  selector:
+    app: app1
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8080
+     
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: app1
+  namespace: custom
+spec:
+  path: /
+  to:
+    kind: Service
+    name: app1
+  port:
+    targetPort: 8080
