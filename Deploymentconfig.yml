@@ -19,7 +19,7 @@ spec:
     - type: ConfigChange
   selector:
     app: app1
-  replicas: 3
+  replicas: 2
   template:
     metadata:
       labels:
