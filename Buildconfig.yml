@@ -1,0 +1,25 @@
+apiVersion: build.openshift.io/v1
+kind: BuildConfig
+metadata:
+  name: app1
+  namespace: custom
+spec:
+  source:
+    type: Git
+    git:
+      uri: https://github.com/praveenrachamreddy/ruby-hello-world.git
+      ref: master
+    contextDir: /
+  strategy:
+    dockerStrategy:
+    type: Docker
+  output:
+    to:
+      kind: ImageStreamTag
+      name: app1:latest
+  runPolicy: Serial
+  # triggers:
+  #   - type: "GitHub"
+  #     github:
+  #       secretReference:
+  #         name: "mysecret"
