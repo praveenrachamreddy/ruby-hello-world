@@ -15,7 +15,7 @@ spec:
           namespace: custom
           name: 'app1:latest'
         lastTriggeredImage: >-
-          image-registry.openshift-image-registry.svc:5000/custom/app1@sha256:dbc99232c73667f72c3efcc9c120d414f63aa3be6cb52506ad2b2cb4deb6c059
+          image-registry.openshift-image-registry.svc:5000/custom/app1@sha256:580024b9e0c7fbc284781f8f49b59302d96d5ded47db225a14ad633c74294ac9
     - type: ConfigChange
   selector:
     app: app1
