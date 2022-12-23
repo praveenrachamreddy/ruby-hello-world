@@ -18,8 +18,8 @@ spec:
       kind: ImageStreamTag
       name: app1:latest
   runPolicy: Serial
-      triggers:
-      - type: "ConfigChange"
+  triggers:
+    - type: "ConfigChange"
   #   - type: "GitHub"
   #     github:
   #       secretReference:
